@@ -19,13 +19,13 @@ class RockPaperScissorsGame
 		do
 		{  
 		   cout << "----- Rock Paper Scissors Game-----";
-			cout << " \nPress 1 Is Rock";
-			cout << "\nPress 2 Is Paper";
-			cout << "\nPress 3 Is scissors";
+			cout << " \n Press 1 Is Rock";
+			cout << "\n Press 2 Is Paper";
+			cout << "\n Press 3 Is scissors";
 			cout << "\n  Please Enter your name ";
 			cin >> name;
 			
-			cout << "Enter your choice is(1-3): ";
+			cout << "Enter your choice is";
 			cin >> player;
 			
 			
