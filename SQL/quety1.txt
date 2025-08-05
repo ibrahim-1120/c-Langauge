@@ -1,0 +1,47 @@
+SELECT * FROM employee join department on employee.DepartmentID = department.DepartmentID  
+
+SELECT * from department left join employee on department.DepartmentID = employee.DepartmentID
+
+SELECT * from department RIGHT join employee on department.DepartmentID = employee.DepartmentID;
+
+SELECT * FROM `employee` FULL JOIN department
+
+SELECT DepartmentName,COUNT(EmployeeID) as TotalEmp  FROM employee join department on employee.DepartmentID = department.DepartmentID  GROUP BY employee.DepartmentID
+
+SELECT DepartmentID, COUNT(EmployeeID) as totalEmp from employee GROUP BY DepartmentID;
+
+SELECT DepartmentName,COUNT(EmployeeID) as TotalEmp ,sum(Salary) as totalSalaray FROM employee join department on employee.DepartmentID = department.DepartmentID  GROUP BY employee.DepartmentID;
+
+SELECT DepartmentName,COUNT(EmployeeID) as TotalEmp ,sum(Salary) as totalSalaray FROM employee join department on employee.DepartmentID = department.DepartmentID  GROUP BY employee.DepartmentID HAVING totalSalaray>300000;
+
+
+CREATE UNIQUE INDEX username ON student(sname);
+
+//=================commit==============
+START TRANSACTION;
+DELETE from student where sid=3;
+COMMIT;
+
+//==============rollback===============
+START TRANSACTION;
+DELETE from student where sid=1;
+ROLLBACK;
+
+//============SAVEPOINT================
+START TRANSACTION;
+
+SAVEPOINT sp1;
+INSERT INTO student(sname,email,contact)VALUES("dev","dev@gmail.com",8787878);
+
+SAVEPOINT sp2;
+UPDATE student set email="radha@gmail.com" where sid=1;
+
+SAVEPOINT sp3;
+DELETE from student WHERE sid=1;
+
+ROLLBACK to sp3;
+
+COMMIT;
+
+======================View==============
+CREATE VIEW empView as SELECT FirstName ,email,salary,DepartmentName from employee join department on employee.DepartmentID=department.DepartmentID

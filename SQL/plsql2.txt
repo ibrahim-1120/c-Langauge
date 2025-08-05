@@ -1,0 +1,81 @@
+DECLARE
+  message varchar2(100):= 'Hello, World!'; 
+  age int := 18;
+BEGIN 
+  if age >= 18
+  then
+  dbms_output.put_line('eligible');
+  end if;
+END;
+/
+
+DECLARE
+  message varchar2(100):= 'Hello, World!'; 
+  age int := 11;
+BEGIN 
+  if age >= 18
+  then
+  dbms_output.put_line('eligible');
+  else 
+  dbms_output.put_line('not eligible');
+  end if;
+END;
+/
+
+
+DECLARE
+  message varchar2(100):= 'Hello, World!'; 
+  grade char := 'd';
+BEGIN 
+   case grade
+   when 'a' then
+   dbms_output.put_line('first');
+  when 'b' then
+  dbms_output.put_line('sec');
+  when 'c' then
+  dbms_output.put_line('third');
+  else
+  dbms_output.put_line('fail');
+  
+  END case;
+END;
+/
+
+
+DECLARE
+  i int := 1;
+BEGIN 
+  while i<=10 loop
+    dbms_output.put_line('i='||i);
+    i:=i+1;
+  END loop;  
+END;
+/
+
+
+
+DELIMITER $$
+
+CREATE PROCEDURE UpdateSalaries()
+BEGIN
+    DECLARE done INT DEFAULT FALSE;
+    DECLARE emp_id INT;
+    DECLARE emp_salary DECIMAL(10,2);
+    DECLARE cur CURSOR FOR SELECT EmployeeID, Salary FROM employee;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+    OPEN cur;
+
+    read_loop: LOOP
+        FETCH cur INTO emp_id, emp_salary;
+        IF done THEN
+            LEAVE read_loop;
+        END IF;
+
+        UPDATE employee SET Salary = emp_salary * 1.10 WHERE EmployeeID = emp_id;
+    END LOOP;
+
+    CLOSE cur;
+END$$
+
+DELIMITER ;

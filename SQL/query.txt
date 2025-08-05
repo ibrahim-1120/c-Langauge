@@ -1,0 +1,158 @@
+CREATE DATABASE studentdb;
+
+CREATE TABLE student (sid int PRIMARY KEY AUTO_INCREMENT,sname varchar(50),email varchar(50),contact varchar(10));
+CREATE TABLE cources(cid int PRIMARY KEY AUTO_INCREMENT,cname varchar(50),duration varchar(30),fees float )
+
+
+INSERT INTO student(sname,email,contact)values("Zeel","Zeel@gmail.com","900090000");
+INSERT INTO student(sname,email,contact)values("Tisha","Tisha@gmail.com","908800808");
+INSERT INTO student(sname,email,contact)values("Tisha Patel","T@gmail.com","7878787887");
+INSERT INTO student(sname,email,contact)values("Devansi","d@gmail.com","988978978");
+INSERT INTO student(sname,email,contact)values("Nirja","n@gmail.com","8897897987");
+
+
+INSERT INTO cources(cname,duration,fees)values("Java","* month","70000");
+INSERT INTO cources(cname,duration,fees)values("Python","4 month","50000");
+INSERT INTO cources(cname,duration,fees)values("PHP","6 month","50000");
+INSERT INTO cources(cname,duration,fees)values("Nodejs","5 month","40000");
+
+
+CREATE TABLE student_cources(id int PRIMARY KEY AUTO_INCREMENT,sid int,cid int,addmisiondate date,FOREIGN KEY(sid) REFERENCES student(sid), FOREIGN KEY(cid) REFERENCES cources(cid))
+
+INSERT INTO student_cources(sid,cid,addmisiondate)VALUES(1,3,now());
+
+INSERT INTO student_cources(sid,cid,addmisiondate)VALUES(2,1,"2025-01-01");
+INSERT INTO student_cources(sid,cid,addmisiondate)VALUES(3,3,"2025-01-01");
+INSERT INTO student_cources(sid,cid,addmisiondate)VALUES(4,3,"2025-01-01");
+INSERT INTO student_cources(sid,cid,addmisiondate)VALUES(5,4,"2025-01-01");
+
+
+CREATE TABLE Department (
+    DepartmentID INT PRIMARY KEY,
+    DepartmentName VARCHAR(50)
+);
+
+INSERT INTO Department (DepartmentID, DepartmentName) VALUES
+(1, 'IT'),
+(2, 'HR'),
+(3, 'Finance'),
+(4, 'Design'),
+(5, 'Marketing');
+
+
+CREATE TABLE Employee (
+    EmployeeID INT PRIMARY KEY,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    Position VARCHAR(100),
+    DepartmentID INT,
+    HireDate DATE,
+    Salary DECIMAL(10, 2),
+    Email VARCHAR(100),
+    FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID)
+);
+
+
+INSERT INTO Employee (EmployeeID, FirstName, LastName, Position, DepartmentID, HireDate, Salary, Email) VALUES
+(1, 'John', 'Smith', 'Software Engineer', 1, '2019-03-12', 85000.00, 'john.smith@company.com'),
+(2, 'Sarah', 'Johnson', 'HR Manager', 2, '2017-06-01', 92000.00, 'sarah.johnson@company.com'),
+(3, 'Michael', 'Brown', 'Analyst', 3, '2020-11-18', 70000.00, 'michael.brown@company.com'),
+(4, 'Emily', 'Davis', 'UX Designer', 4, '2021-01-25', 78000.00, 'emily.davis@company.com'),
+(5, 'James', 'Wilson', 'Product Manager', 1, '2018-09-03', 97000.00, 'james.wilson@company.com'),
+(6, 'Linda', 'Martinez', 'QA Engineer', 1, '2022-02-14', 69000.00, 'linda.martinez@company.com'),
+(7, 'Robert', 'Garcia', 'DevOps Engineer', 1, '2016-04-20', 89000.00, 'robert.garcia@company.com'),
+(8, 'Patricia', 'Miller', 'Recruiter', 2, '2020-08-30', 63000.00, 'patricia.miller@company.com'),
+(9, 'David', 'Rodriguez', 'Accountant', 3, '2015-12-11', 74000.00, 'david.rodriguez@company.com'),
+(10, 'Barbara', 'Lee', 'Graphic Designer', 4, '2021-05-07', 67000.00, 'barbara.lee@company.com'),
+(11, 'Richard', 'Walker', 'Tech Lead', 1, '2014-10-16', 101000.00, 'richard.walker@company.com'),
+(12, 'Susan', 'Hall', 'HR Coordinator', 2, '2019-07-22', 58000.00, 'susan.hall@company.com'),
+(13, 'Joseph', 'Allen', 'Data Analyst', 3, '2023-04-04', 72000.00, 'joseph.allen@company.com'),
+(14, 'Jessica', 'Young', 'UI Developer', 4, '2020-06-15', 75000.00, 'jessica.young@company.com'),
+(15, 'Thomas', 'Hernandez', 'Scrum Master', 1, '2018-03-10', 88000.00, 'thomas.hernandez@company.com'),
+(16, 'Karen', 'King', 'Network Admin', 1, '2017-10-02', 77000.00, 'karen.king@company.com'),
+(17, 'Charles', 'Wright', 'Compliance Officer', 3, '2021-08-23', 85000.00, 'charles.wright@company.com'),
+(18, 'Nancy', 'Lopez', 'Office Manager', 2, '2016-01-12', 62000.00, 'nancy.lopez@company.com'),
+(19, 'Steven', 'Hill', 'Content Strategist', 5, '2022-07-01', 71000.00, 'steven.hill@company.com'),
+(20, 'Laura', 'Scott', 'Marketing Manager', 5, '2019-11-05', 93000.00, 'laura.scott@company.com');
+
+CREATE TABLE Project (
+    ProjectID INT PRIMARY KEY,
+    ProjectName VARCHAR(100),
+    StartDate DATE,
+    Budget DECIMAL(12, 2)
+);
+
+
+INSERT INTO Project (ProjectID, ProjectName, StartDate, Budget) VALUES
+(1, 'Website Redesign', '2023-01-15', 50000.00),
+(2, 'Mobile App Launch', '2023-05-01', 120000.00),
+(3, 'Cloud Migration', '2022-10-10', 75000.00),
+(4, 'HR System Upgrade', '2023-03-20', 30000.00),
+(5, 'Marketing Campaign 2024', '2024-02-01', 90000.00);
+
+CREATE TABLE EmployeeProject (
+    EmployeeID INT,
+    ProjectID INT,
+    AssignmentDate DATE,
+    Role VARCHAR(50),
+    PRIMARY KEY (EmployeeID, ProjectID),
+    FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID),
+    FOREIGN KEY (ProjectID) REFERENCES Project(ProjectID)
+);
+INSERT INTO EmployeeProject (EmployeeID, ProjectID, AssignmentDate, Role) VALUES
+(1, 1, '2023-01-20', 'Developer'),
+(2, 4, '2023-03-25', 'HR Lead'),
+(3, 3, '2022-10-12', 'Finance Analyst'),
+(4, 1, '2023-01-22', 'UX Designer'),
+(5, 2, '2023-05-05', 'Product Manager'),
+(6, 3, '2022-10-14', 'QA Engineer'),
+(7, 3, '2022-10-15', 'DevOps'),
+(8, 4, '2023-03-26', 'Recruiter'),
+(9, 3, '2022-10-16', 'Accountant'),
+(10, 1, '2023-01-23', 'Designer');
+
+
+============================DQL=============================
+SELECT * FROM employee 
+
+SELECT firstname,lastname,position FROM `employee` 
+
+SELECT DISTINCT Position FROM `employee` 
+
+SELECT * FROM `employee` WHERE DepartmentID =1
+
+SELECT * FROM `employee` ORDER BY FirstName ASC
+
+SELECT * FROM `employee` ORDER BY FirstName DESC;
+
+SELECT * FROM `employee` WHERE  DepartmentID=1 AND Salary>=60000
+
+SELECT * FROM `employee` WHERE DepartmentID=3 or Salary>=100000;
+
+SELECT * FROM `employee` WHERE  NOT DepartmentID=1
+
+
+Minsalary
+SELECT MIN(Salary) as Minsalary from employee;
+
+SELECT max(Salary) as Maxsalary from employee;
+
+SELECT count(EmployeeID) as totalEmployee from employee WHERE DepartmentID=1;
+
+SELECT sum(Salary) as totalSalary from employee WHERE DepartmentID=1;
+
+SELECT avg(Salary) as Avrage from employee WHERE DepartmentID=1;
+
+SELECT * FROM `employee` WHERE FirstName LIKE 'j%';
+
+SELECT * FROM `employee` WHERE FirstName LIKE '%n';
+
+SELECT * FROM `employee` WHERE FirstName LIKE '%k%';
+
+SELECT * FROM `employee` WHERE DepartmentID IN(1,3,5)
+
+SELECT * FROM `employee` WHERE DepartmentID not IN(1,3,5);
+
+SELECT * FROM `employee` WHERE salary BETWEEN 60000 AND 85000
+
+SELECT * FROM `employee` WHERE HireDate BETWEEN '2020-01-01' AND '2022-12-31';

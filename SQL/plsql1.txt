@@ -1,0 +1,22 @@
+DECLARE
+  message varchar2(100):= 'Hello, World!'; 
+BEGIN 
+
+  dbms_output.put_line(message); 
+  message:='tops tech';
+  dbms_output.put_line(message); 
+END;
+/
+
+
+DECLARE
+     number CONSTANT int  :=100;
+     message varchar(20);
+BEGIN 
+
+  dbms_output.put_line(number); 
+  number:=200;
+  message:='tops tech';
+  dbms_output.put_line(message); 
+END;
+/

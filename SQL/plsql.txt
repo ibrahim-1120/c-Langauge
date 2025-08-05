@@ -1,0 +1,16 @@
+CREATE PROCEDURE getEmp()
+SELECT * FROM employee;
+
+call getEmp()
+
+
+CREATE PROCEDURE getEmpById(id int)
+SELECT * from employee where EmployeeID=id;
+
+CALL getEmpById(20)
+
+CREATE TABLE temp (tid int PRIMARY KEY AUTO_INCREMENT,empid int ,timeofevent datetime ,eventname varchar(30));
+
+CREATE TRIGGER triEmp AFTER UPDATE on employee
+FOR EACH ROW
+INSERT INTO temp(empid,timeofevent ,eventname )values(old.EmployeeID,now(),"upadte")
